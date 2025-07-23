@@ -1,0 +1,35 @@
+
+Check for ROOT
+
+Check dependencies (aircrack-ng, hostapd, dnsmasq, xterm)
+
+Stop NetworkManager and kill DHCP-related processes
+
+MENU - Auto OR Manual                                       
+
+(Optional) Scan for target networks using monitor mode and airodump-ng
+
+Hostapd_setup & Generate hostapd.conf with the selected primary interface
+
+Extract config values from hostapd.conf (interface, BSSID, channel)
+
+Show available interfaces
+
+Prompt user to select second interface
+
+Assign static IP (10.0.0.1/24) to the primary interface
+
+Write dnsmasq.conf with matching DHCP/DNS settings
+
+Start hostapd (broadcast rogue AP)
+
+Start dnsmasq (serve IP + DNS to victims)
+
+POST START OPTION MENU                                      
+
+
+Wait for user to type quit
+
+Clean up: kill services, restore interfaces, restart NetworkManager
+
+

