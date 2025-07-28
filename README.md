@@ -34,3 +34,24 @@ git clone https://github.com/Sota-0/VeilCast-Evil-Twin-Framework.git
 cd VeilCast-Evil-Twin-Framework
 pip3 install -r requirements.txt
 chmod +x veilcast.py
+
+
+
+## ⚠️ Legal Disclaimer
+
+This tool is intended for **educational and authorized testing** purposes only.  
+Unauthorized use of VeilCast **against networks you do not own or have explicit permission to test** is illegal and unethical.
+
+By using this tool, you agree to take full responsibility and follow all applicable laws.
+
+
+## 📬 Contributions & Feedback
+
+This is an evolving project. Feedback, issues, or feature suggestions are welcome via Issues or Pull Requests.
+
+## 🧠 Author
+
+**Sota-0**  
+Student, Developer, Cybersecurity Enthusiast  
+[github.com/Sota-0](https://github.com/Sota-0)
+
