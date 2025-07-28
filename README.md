@@ -33,7 +33,7 @@ It simplifies the process of setting up rogue Wi-Fi access points, launching cap
 git clone https://github.com/Sota-0/VeilCast-Evil-Twin-Framework.git
 cd VeilCast-Evil-Twin-Framework
 pip3 install -r requirements.txt
-chmod +x veilcast.py
+chmod +x main.py
 
 ```
 
