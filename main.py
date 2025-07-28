@@ -15,7 +15,7 @@ import dnsmasq_write
 import check_dependencies
 import AP_Selector
 import post_menu
-
+import banner
 
 
 # =======================================[ FUNCTIONS
@@ -327,4 +327,5 @@ if __name__ == "__main__":
         print("This script must be run as root (sudo). Exiting.")
         sys.exit(1)
     os.system("clear")
+    banner.main()
     main()

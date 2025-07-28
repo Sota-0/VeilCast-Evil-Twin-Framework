@@ -1,6 +1,8 @@
 
 Check for ROOT
 
+Banner
+
 Check dependencies (aircrack-ng, hostapd, dnsmasq, xterm)
 
 Stop NetworkManager and kill DHCP-related processes
