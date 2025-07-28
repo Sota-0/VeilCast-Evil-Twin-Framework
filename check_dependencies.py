@@ -11,7 +11,7 @@ init(autoreset=True)
 # Check Dependencies
 #============================
 
-dependencies = ["aircrack-ng", "hostapd", "dnsmasq", "xterm", "rxvt-unicode", "figlet"]
+dependencies = ["aircrack-ng", "hostapd", "dnsmasq", "xterm", "rxvt-unicode", "figlet", "iptables"]
 
 
 # check dependencies
