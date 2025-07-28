@@ -45,6 +45,8 @@ with an added PRESET functionality for Hostapd.
     print("")
     print("")
     print(Fore.RED + "NOTE: ", "Save a valid handshake file in ./handshakes to enable password comparison")
+    print("")
+
 
     print("Press [", Fore.CYAN + "Enter", "] To Continue")
     Command = input("")
