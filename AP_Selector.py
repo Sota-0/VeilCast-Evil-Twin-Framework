@@ -19,6 +19,21 @@ import main
 # continue Script
 
 
+def get_frequency_band(channel):
+    """Return the frequency band (2.4GHz/5GHz) based on channel number."""
+    try:
+        ch = int(channel)
+    except ValueError:
+        return "Unknown"
+    
+    if 1 <= ch <= 14:
+        return "2.4 GHz"
+    elif 32 <= ch <= 165:
+        return "5 GHz"
+    else:
+        return "Unknown"
+
+
 def AP_selector_Func():
     global interface_for_scan
     global selected_bssid
@@ -36,7 +51,7 @@ def AP_selector_Func():
         os.remove(file_path)
 
     except FileNotFoundError:
-         pass
+        pass
 
     else:
         pass
@@ -46,30 +61,32 @@ def AP_selector_Func():
     time.sleep(2)
     main.detect_network_interfaces()
     
-    print(Fore.YELLOW + "this interface will be used for relevent funcitons")
+    print(Fore.YELLOW + "This interface will be used for relevant functions")
     print("")
-    interface_for_scan = input("interface to scan with: ").strip()
-
+    interface_for_scan = input("Interface to scan with: ").strip()
 
     while True:
         try:
             scan_time = int(input("Scan Duration (seconds): "))
             break
         except ValueError:
-                print("Please enter a valid number.")
+            print("Please enter a valid number.")
 
-    print(Fore.YELLOW + f"Switching ", interface_for_scan, Fore.YELLOW + " to MONITOR" )
+    print(Fore.YELLOW + f"Switching {interface_for_scan} to MONITOR" )
     main.enable_monitor_mode(interface_for_scan)
 
     print("")
     print("Please Wait...")
-    subprocess.Popen(['xterm', '-hold', '-geometry', '100x50', '-e', f'sudo airodump-ng {interface_for_scan} --write ./scan/recent --output-format csv '])
+    subprocess.Popen([
+        'xterm', '-hold', '-geometry', '100x50', '-e',
+        f'sudo airodump-ng {interface_for_scan} --write ./scan/recent --output-format csv '
+    ])
     time.sleep(scan_time)
     print(Fore.GREEN + "Killing airodump-ng")
     print("")
     subprocess.run(["sudo", "pkill", "airodump-ng"])
     print("")
-    print(Fore.YELLOW + f"Switching ", interface_for_scan, Fore.YELLOW + " to MANAGED" )
+    print(Fore.YELLOW + f"Switching {interface_for_scan} to MANAGED")
     main.disable_monitor_mode(interface_for_scan)
     print("")
     print(Fore.GREEN + "DONE")
@@ -79,7 +96,7 @@ def AP_selector_Func():
     print(Fore.GREEN + "Please Wait...")
     time.sleep(1.5)
 
-
+    # Parse CSV results
     with open("./scan/recent-01.csv", "r", encoding="utf-8") as f:
         lines = []
         for line in f:
@@ -91,7 +108,6 @@ def AP_selector_Func():
     reader = csv.DictReader(lines)
     reader.fieldnames = [h.strip() for h in reader.fieldnames]
 
-
     ap_list = []
     for row in reader:
         essid = row["ESSID"].strip()
@@ -100,9 +116,12 @@ def AP_selector_Func():
         if essid and bssid not in blocked_bssids:
             ap_list.append((essid, bssid, channel))
 
+    # Display APs with band info
     print("Select a network:")
-    for i, (essid, _, _) in enumerate(ap_list):
-        print(f"{i + 1}. {essid}")
+    for i, (essid, _, channel) in enumerate(ap_list):
+        band = get_frequency_band(channel)
+        color = Fore.CYAN if "5" in band else Fore.YELLOW
+        print(f"{i + 1}. {essid} {color}({band})")
 
     while True:
         try:
@@ -114,14 +133,17 @@ def AP_selector_Func():
         except ValueError:
             print("Please enter a number.")
 
-
     selected_essid, selected_bssid, selected_channel = ap_list[choice]
+    selected_band = get_frequency_band(selected_channel)
 
     print("")
     print("\nSelected AP:")
     print(f"ESSID  : ", Fore.GREEN + selected_essid)
     print(f"BSSID  : ", Fore.GREEN + selected_bssid)
     print(f"Channel: ", Fore.GREEN + selected_channel)
+    print(f"Band   : ", Fore.GREEN + selected_band)
 
 
-
+# Call the function if this script is run directly
+if __name__ == "__main__":
+    AP_selector_Func()
