@@ -8,7 +8,6 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import Compare_pass
 
-
 class CaptiveHandler(http.server.SimpleHTTPRequestHandler):
     def do_POST(self):
         length = int(self.headers.get('Content-Length', 0))
