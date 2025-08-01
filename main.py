@@ -214,6 +214,8 @@ def auto_manual():
 
                 if command == "1":
                     print()
+                elif command == "back":
+                    auto_manual()
                     selected_bssid = "02:11:22:33:44:55"
                     break
                 elif command == "2":
@@ -242,10 +244,6 @@ ctrl_interface=/tmp/hostapd
             hostapd_write.hostapd_setup_input()
             break
 
-
-
-
-    
 
 
 # =======================================[ MAIN FUNCTION

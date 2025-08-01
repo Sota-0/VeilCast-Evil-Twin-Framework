@@ -3,7 +3,10 @@ import os
 import colorama
 from colorama import Fore, init
 init(autoreset=True)
+import sys
 
+import main
+import full_cleanup
 #----------------------------------------------------------------------- CONFIG HANDELING
 
 # set variables
@@ -193,9 +196,13 @@ this section of the tool is used to configure the hostapd.conf file
 
 clear                  - Clears the screen and refreshes the options menu
 exit                   - Exits the script safely
+back                   - returns to previous menu
 HELP                   - Displays the help menu with command and option info
 set <option> <value>   - Sets a configuration value (e.g. SET ssid MyNetwork)
+WRITE                  - Writes current configuration to hostapd ( only do once finnished )
 PRESET <name>          - Saves the current hostapd setup as a preset
+          
+Type [ clear ] to return
 ''')
 
 def help_menu2():
@@ -213,8 +220,11 @@ this section is used to load previously saved hostapd configurations
 
 clear                  - Clears the screen and refreshes the options menu
 exit                   - Exits the script safely
+back                   - returns to previous menu
 load < option >        - Loads a pre-saved preset from the list
 show < option >        - Displays preset contents
+          
+Type [ clear ] to return
 ''')
 
 def hostapd_setup_input():
@@ -226,7 +236,12 @@ def hostapd_setup_input():
     if a == "exit":
         print(Fore.MAGENTA + "Thank You For Using!")
         time.sleep(2)
-        exit()
+        full_cleanup.full_cleanup()
+        sys.exit()
+
+    elif a == "back":
+        main.auto_manual()
+        pass
 
     elif a == "1":
         os.system("clear")
@@ -236,6 +251,13 @@ def hostapd_setup_input():
             command = input("$> ")
             if command == "clear":
                 clear()
+            elif command == "back":
+                hostapd_setup_input()
+            elif command == "exit":
+                print(Fore.MAGENTA + "Thank You For Using!")
+                time.sleep(2)
+                full_cleanup.full_cleanup()
+                sys.exit()
             elif command.lower().startswith("set "):
                 handle_set_command(command)
             elif command == "WRITE":
@@ -276,11 +298,14 @@ ctrl_interface=/tmp/hostapd
             if command == "clear":
                 os.system("clear")
                 show_files_in_folder(folder_path)
-                print(Fore.GREEN + "type ' help ' to show options")
             elif command.lower() == "help":
                 help_menu2()
+            elif command == "back":
+                hostapd_setup_input()
             elif command == "exit":
                 print("Thanks For Using!")
+                time.sleep(.5)
+                full_cleanup.full_cleanup()
                 exit()
             elif command.lower().startswith("load "):
                 bb = command.split()
