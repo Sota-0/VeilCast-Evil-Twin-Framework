@@ -13,7 +13,7 @@ import os
 
 # ./tmp/recent-01.csv
 
-os.system("rm ./tmp/recent-01.csv")
+os.system("rm ./scan/recent-01.csv")
 
 
 # ./Network_Passwords

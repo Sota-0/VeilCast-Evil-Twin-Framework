@@ -182,50 +182,99 @@ def assigning_ip_addr():
     os.system(f"ip addr show {interface_name}")
 
 
-def auto_manual():
-    os.system("clear")
+def choices():
+        command = input("$> ")
 
-    print("Setup Options")
-    print("1. Automatic Setup")
-    print("2. Manual Setup")
+        while True:
 
-    command = input("$> ")
+            if command == "1":
+                print("Selected ", Fore.GREEN + "Automatic Setup")
+                time.sleep(1)
+                os.system("clear")
+                print("this interface setup will be used for hosting")
+                print("")
+                time.sleep(4)
+                AP_Selector.AP_selector_Func()
 
-    while True:
+                from AP_Selector import selected_essid, selected_bssid, selected_channel, interface_for_scan
 
-        if command == "1":
-            print("Selected ", Fore.GREEN + "Automatic Setup")
-            time.sleep(1)
-            os.system("clear")
-            print("this interface setup will be used for hosting")
-            print("")
-            time.sleep(4)
-            AP_Selector.AP_selector_Func()
+                aa = selected_bssid
+                bb = selected_channel
 
-            from AP_Selector import selected_essid, selected_bssid, selected_channel, interface_for_scan
+                print("")
+                print("bssid preference:")
+                print("[1] Use default BSSID")
+                print("[2] Use original BSSID from target")
 
-            print("")
-            print("bssid preference:")
-            print("[1] Use default BSSID")
-            print("[2] Use original BSSID from target")
+                while True:
+                    command = input("$>")
 
-            while True:
-                command = input("$>")
+                    if command == "1":
+                        print("")
+                        selected_bssid = "02:11:22:33:44:55"
+                        break
 
-                if command == "1":
-                    print()
-                elif command == "back":
-                    auto_manual()
-                    selected_bssid = "02:11:22:33:44:55"
-                    break
-                elif command == "2":
-                    selected_bssid = selected_bssid
-                    break
-                else:
-                    print("invalid input")
+                    elif command == "back":
+                        auto_manual()
+                        
+                    elif command == "2":
+                        selected_bssid = selected_bssid
+                        break
+                    else:
+                        print("invalid input")
 
-            with open("hostapd.conf", "w") as a:
-                a.write(f'''interface={interface_for_scan}
+    # --------------------------------
+                print("")
+                print("Channel preference:")
+                print("[1] choose channel")
+                print("[2] Use original Channel from target")
+
+                while True:
+                    command = input("$>")
+                    
+                    if command == "1":
+                        print("")
+                        a = input("channel: ")
+                        selected_channel = a
+                        break
+
+                    elif command == "back":
+                        auto_manual()
+                        
+                    elif command == "2":
+                        selected_channel = selected_channel
+                        break
+                    else:
+                        print("invalid input")
+                    
+                if aa == selected_bssid and bb == selected_channel:
+                    print("")
+                    print(Fore.RED + "NOTE: ", '''Choosing the same BSSID and Channel as the real AP can cause conflict issues. 
+      this ultimatly comes down to what your drivers support. 
+      so its generally not reccomended.''')
+                    print("")
+           
+                    c = input("Change Selection? ( y / n ): ").lower()
+                    
+                    if c == "y":
+                        os.system("clear")
+                        print("")
+                        print("Setup Options")
+                        print("1. Automatic Setup")
+                        print("2. Manual Setup")
+                        print("")
+                        choices()
+
+                    elif c == "n":
+                        print(Fore.CYAN + "Proceeding without changes...")
+                    
+                    else:
+                        print("")
+                        print(Fore.RED + "Invalid Input")
+    # --------------------------------
+
+                with open("hostapd.conf", "w") as a:
+                    a.write(f'''interface={interface_for_scan}
 driver=nl80211
 ssid={selected_essid}
 bssid={selected_bssid}
@@ -234,17 +283,27 @@ channel={selected_channel}
 auth_algs=1
 ctrl_interface=/tmp/hostapd
 ''')
-            break
+                break
 
-        elif command == "2":
-            print("Selected ", Fore.GREEN + "Manual Setup")
-            time.sleep(1)
-            os.system("clear")
-            scan_for_targets()
-            hostapd_write.hostapd_setup_input()
-            break
+            elif command == "2":
+                print("Selected ", Fore.GREEN + "Manual Setup")
+                time.sleep(1)
+                os.system("clear")
+                scan_for_targets()
+                hostapd_write.hostapd_setup_input()
+                break
 
 
+
+def auto_manual():
+    os.system("clear")
+
+    print("Setup Options")
+    print("1. Automatic Setup")
+    print("2. Manual Setup")
+    
+
+    choices()
 
 # =======================================[ MAIN FUNCTION
 
