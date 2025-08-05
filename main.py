@@ -223,7 +223,6 @@ def choices():
                     else:
                         print("invalid input")
 
-    # --------------------------------
                 print("")
                 print("Channel preference:")
                 print("[1] choose channel")
@@ -271,7 +270,6 @@ def choices():
                     else:
                         print("")
                         print(Fore.RED + "Invalid Input")
-    # --------------------------------
 
                 with open("hostapd.conf", "w") as a:
                     a.write(f'''interface={interface_for_scan}
