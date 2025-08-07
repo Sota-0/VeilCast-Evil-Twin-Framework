@@ -72,6 +72,25 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 import Compare_pass
 
 class CaptiveHandler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        captive_test_paths = [
+            "/connecttest.txt",
+            "/ncsi.txt",
+            "/generate_204",
+            "/hotspot-detect.html",
+            "/redirect",
+            "/fwlink"
+        ]
+        if self.path in captive_test_paths:
+            self.send_response(200)
+            self.send_header('Content-type', 'text/html')
+            self.end_headers()
+            with open("index.html", "rb") as f:
+                self.wfile.write(f.read())
+            return
+        else:
+            super().do_GET()
+
     def do_POST(self):
         length = int(self.headers.get('Content-Length', 0))
         post_data = self.rfile.read(length).decode('utf-8')
