@@ -34,11 +34,27 @@ def get_frequency_band(channel):
         return "Unknown"
 
 
+# --- NEW: map power to strength ---
+def get_signal_strength(power):
+    try:
+        p = int(power)
+    except ValueError:
+        return Fore.WHITE + "Unknown"
+    
+    if p >= -60:  # strong signal
+        return Fore.GREEN + "strong"
+    elif -80 <= p < -60:  # medium
+        return Fore.YELLOW + "good"
+    else:  # weak
+        return Fore.RED + "weak"
+
+
 def AP_selector_Func():
     global interface_for_scan
     global selected_bssid
     global selected_channel
     global selected_essid
+    global selected_power
 
     blocked_bssids = ["02:11:22:33:44:55"]
 
@@ -51,9 +67,6 @@ def AP_selector_Func():
         os.remove(file_path)
 
     except FileNotFoundError:
-        pass
-
-    else:
         pass
 
     # scan
@@ -113,15 +126,17 @@ def AP_selector_Func():
         essid = row["ESSID"].strip()
         bssid = row["BSSID"].strip()
         channel = row["channel"].strip()
+        power = row["Power"].strip()  # NEW
         if essid and bssid not in blocked_bssids:
-            ap_list.append((essid, bssid, channel))
+            ap_list.append((essid, bssid, channel, power))
 
-    # Display APs with band info
+    # Display APs with band info and signal strength
     print("Select a network:")
-    for i, (essid, _, channel) in enumerate(ap_list):
+    for i, (essid, bssid, channel, power) in enumerate(ap_list):
         band = get_frequency_band(channel)
         color = Fore.CYAN if "5" in band else Fore.YELLOW
-        print(f"{i + 1}. {essid} {color}({band})")
+        strength = get_signal_strength(power)
+        print(f"{i + 1}. {essid} {color}({band}) ", Fore.RESET + f"| Strength: {strength} ", Fore.RESET + f"| BSSID: {bssid} | Channel: {channel} | Power: {power} dBm")
 
     while True:
         try:
@@ -133,15 +148,17 @@ def AP_selector_Func():
         except ValueError:
             print("Please enter a number.")
 
-    selected_essid, selected_bssid, selected_channel = ap_list[choice]
+    selected_essid, selected_bssid, selected_channel, selected_power = ap_list[choice]
     selected_band = get_frequency_band(selected_channel)
 
     print("")
     print("\nSelected AP:")
-    print(f"ESSID  : ", Fore.GREEN + selected_essid)
-    print(f"BSSID  : ", Fore.GREEN + selected_bssid)
-    print(f"Channel: ", Fore.GREEN + selected_channel)
-    print(f"Band   : ", Fore.GREEN + selected_band)
+    print(f"ESSID    : ", Fore.GREEN + selected_essid)
+    print(f"BSSID    : ", Fore.GREEN + selected_bssid)
+    print(f"Channel  : ", Fore.GREEN + selected_channel)
+    print(f"Band     : ", Fore.GREEN + selected_band)
+    print(f"Power    : ", Fore.GREEN + selected_power + " dBm")
+    print(f"Strength : ", get_signal_strength(selected_power))
 
 
 # Call the function if this script is run directly
